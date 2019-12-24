@@ -19,7 +19,7 @@ public class CustomUserDetails implements UserDetails{
 	CustomUserDetails(UserModel user){
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.active = user.isActive();
+		this.active = true;
 		this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 

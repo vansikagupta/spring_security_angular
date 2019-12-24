@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.vansika.userMangement.security.CustomUserDetails;
 import com.vansika.userMangement.security.UserModel;
 import com.vansika.userMangement.security.UserRepository;
 
@@ -19,7 +20,7 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	 UserModel getLoggedInUser(Authentication auth){
+	private String getLoggedUserName(Authentication auth){
 		String username;
 		Object principal = auth.getPrincipal();
 		if (principal instanceof UserDetails) {
@@ -27,6 +28,12 @@ public class UserService {
 		} else {
 		  username = principal.toString();
 		}
+		return username;
+	}
+	
+	UserModel getLoggedInUser(Authentication auth){
+		String username = getLoggedUserName(auth);
+		
 		Optional<UserModel> optionalUser = userRepository.findByUsername(username);
 		UserModel user = optionalUser.get();
 		return user;
@@ -35,5 +42,13 @@ public class UserService {
 	public String addUser(UserModel newUser) {
 		userRepository.save(newUser);
 		return "Registration successfull";
+	}
+
+	public User getLoggedUserDetails(Authentication auth) {
+		String username = getLoggedUserName(auth);
+		
+		Optional<UserModel> optionalUser = userRepository.findByUsername(username);
+		UserModel user = optionalUser.get();
+		return new User(user);
 	}
 }

@@ -1,25 +1,19 @@
 package com.vansika.userMangement.user;
 //import javax.persistence.Entity;
 
+import com.vansika.userMangement.security.UserModel;
+
 public class User {
-	private long id;
 	private String username;
-	private String password;
-	private String passwordConfirm;
+	private String firstName;
+	private String lastName;
+	private String about;
 	
-	public User(Long id, String username, String password, String passwordConfirm) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.passwordConfirm = passwordConfirm;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
+	public User(UserModel user) {
+		this.username = user.getUsername();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.about = user.getAbout();
 	}
 	public String getUsername() {
 		return username;
@@ -27,17 +21,24 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
-		return password;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
+	public String getAbout() {
+		return about;
+	}
+	public void setAbout(String about) {
+		this.about = about;
+	}
+	
 
 }
