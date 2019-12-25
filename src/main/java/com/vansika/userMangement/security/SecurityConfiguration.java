@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -36,6 +37,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		web.ignoring().antMatchers("/","/test");
         
 	}
+	
+	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+		
+	    http.authorizeRequests().antMatchers("/rest/**").authenticated();
+	    http.csrf().disable();
+	    http.formLogin().loginPage("/login").permitAll();
+	    http.cors();
+    }
 
 	
 	@Bean

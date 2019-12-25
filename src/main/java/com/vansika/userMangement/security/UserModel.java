@@ -19,8 +19,9 @@ public class UserModel {
 	private String lastName;
 	private String about;
 	
+	public UserModel(){}
+	
 	public UserModel(String username, String password, String firstName, String lastName, String about) {
-		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
