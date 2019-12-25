@@ -33,19 +33,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/registration");
-		web.ignoring().antMatchers("/","/test");
-        
+		web.ignoring().antMatchers("/rest/registration");
 	}
 	
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-		
-	    http.authorizeRequests().antMatchers("/rest/**").authenticated();
-	    http.csrf().disable();
-	    http.formLogin().loginPage("/login").permitAll();
-	    http.cors();
-    }
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+					.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()
+					.and().httpBasic();
+	}
 
 	
 	@Bean

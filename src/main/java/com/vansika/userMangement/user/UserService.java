@@ -39,9 +39,9 @@ public class UserService {
 		return user;
 	}
 
-	public String addUser(UserModel newUser) {
+	public void addUser(UserModel newUser) {
 		userRepository.save(newUser);
-		return "Registration successfull";
+		//return "Registration successfull";
 	}
 
 	public User getLoggedUserDetails(Authentication auth) {
